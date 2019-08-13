@@ -21,9 +21,12 @@ def stockPriceIntraday(ticker,folder):
 	intraday.to_csv(file)
 	print('Intraday for ['+ticker+'] got')
 
+'''
+
 # Step 1. Get tickers online
 tickersRawData = tushare.get_stock_basics()
 tickers = tickersRawData.index.tolist()
+
 
 
 # Step 2. Save the ticker list to a local file
@@ -32,7 +35,7 @@ file = '../02. Data/00. TickerListCN/TickerList_'+dateToday+'.csv'
 tickersRawData.to_csv(file)
 print ('Tickers saved.')
 
-'''for i, ticker in enumerate(tickers):
+for i, ticker in enumerate(tickers):
 	try:
 		print('Intraday', i, '/',len(tickers))'''
 stockPriceIntraday('399006', folder='../02. Data/01. IntradayCN/')
@@ -41,6 +44,7 @@ stockPriceIntraday('399006', folder='../02. Data/01. IntradayCN/')
 
 
 print('Intraday for all stocks got')
+
 
 
 

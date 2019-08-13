@@ -11,7 +11,7 @@ matplotlib.style.use('ggplot')
 
 def stockPricePlot(ticker):
 	# Step 1.Load Data
-	history = pandas.read_csv('../02. Data/01. IntradayCN/'+ticker+'.csv',parse_dates=True,index_col=0)
+	history = pandas.read_csv('../02. Data/01. IntradayUS/'+ticker+'.csv',parse_dates=True,index_col=0)
 	# Step 2.Data Manipulation
 	close = history['close']
 	
@@ -32,7 +32,7 @@ def stockPricePlot(ticker):
 	mpl_finance.candlestick_ohlc(ax=subplot2,quotes=ohlc.values,width=0.01,colorup='g',colordown='r')
 
 	plt.show()
-stockPricePlot('399006')
+stockPricePlot('QQQ')
 
 
 

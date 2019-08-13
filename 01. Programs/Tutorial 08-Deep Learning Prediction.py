@@ -48,15 +48,16 @@ def getDeepLearningData(ticker):
 	
 	return X_Training,Y_Training,X_Testing,Y_Testing,Y_Testing_Base
 
-def predict(model, x):
+
+def predict(model, X):
 	predictionsNormalized = []
 
-	for i in range(len(x)):
-		data = x[i]
+	for i in range(len(X)):
+		data = X[i]
 		result = []
 
 		for j in range(CONST_TRAINING_SEQUENCE_LENGTH):
-			predicted = model.predict(data[numpy.newaxis, :, :][0, 0])
+			predicted = model.predict(data[numpy.newaxis, :, :]) [0, 0]
 			result.append(predicted)
 			data = data[1:]
 			data = numpy.insert(data,[CONST_TRAINING_SEQUENCE_LENGTH-1],predicted,axis=0)
@@ -73,11 +74,15 @@ def plotResults(Y_Hat, Y):
 
 	plt.show()
 
+
+
 def predictLSTM(ticker):
 	#Step 1.Load data
 	X_Training,Y_Training,X_Testing,Y_Testing,Y_Testing_Base = getDeepLearningData(ticker)
 
 	print(Y_Testing)
+
+	
 	#Step 2.Build model
 	model = Sequential()
 
@@ -92,6 +97,7 @@ def predictLSTM(ticker):
 		return_sequences=False))
 
 	model.add(Dropout(0.2))
+
 	model.add(Dense(output_dim=1))
 	model.add(Activation('linear'))
 
@@ -100,8 +106,9 @@ def predictLSTM(ticker):
 	#Step 3.Train model
 	model.fit(X_Training, Y_Training,
 		batch_size=512,
-		nb_epoch=10,
+		nb_epoch=5,
 		validation_split=0.05)
+
 	#Step 4.Predict
 	
 	predictionsNormalized = predict(model, X_Testing)
